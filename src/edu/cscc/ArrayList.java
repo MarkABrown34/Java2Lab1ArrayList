@@ -1,5 +1,7 @@
 package edu.cscc;
 
+import java.util.Arrays;
+
 public class ArrayList {
     private Object[] array;
 
@@ -30,17 +32,20 @@ public class ArrayList {
 
 
 //    Add the given element, value, to the end of the list
-    public void add(Object value){
-        Object[] newArray = new Object[array.length + 1];
-
-        for(int i = 0; i < array.length; i++){
-            newArray[i] = array[i];
+    public void addEnd(Object value){
+        if (array.length > this.size()) {
+            array[this.size()] = value;
+        } else {
+            if (array.length == this.size()) {
+                array = Arrays.copyOf(array, 2 * this.size());
+                array[this.size()] = value;
+            }
         }
     }
 
 
     //    Add the given element, value, to the list at the given index
-    public void add(int index, Object value) {
+    public void addIndex(int index) {
         if (index < 0 || index >= array.length) {
             System.out.println("Invalid index.  Please select valid index.");
         }
@@ -55,35 +60,12 @@ public class ArrayList {
             if (currentIndex == false) {
                 newArray[i] = array[i];
             }
-            if (currentIndex == true) {
-                newArray[index] = value;
-                foundIndex = true;
-            }
             if (foundIndex == true) {
                 newArray[i + 1] = array[i];
             }
         }
         array = newArray;
     }
-
-
-//        Add check to determine if array is full.
-//    If not full, add element to array
-//    If full, double array size
-        if (array.length <= array.size()) {
-//        insert element
-        } else {
-            if array.length > array.size() {
-                Object[] newArray = new Object[2 * array.length];
-            }
-
-        }
-    }
-//    Add check to determine if array is full
-//    After
-//    this operation is complete, get(index) will return value. This
-//    operation is only valid for 0 <= index <= size().
-//    Whenever the array fills, double the size.
 
 
 //    Get method
@@ -93,7 +75,7 @@ public class ArrayList {
 
 
 //    Remove method
-    public Object remove(Object value){
+    public Object removeFirst(Object value){
         boolean removedIndex = false;
         Object removedElement = null;
         Object[] newArray = new Object[array.length - 1];
@@ -119,7 +101,7 @@ public class ArrayList {
 
 
 //    Remove and return the element with the given index from the list
-    public Object remove(int index){
+    public Object removeIndex(int index){
         boolean removedIndex = false;
         Object removedElement = array[index];
         Object[] newArray = new Object[array.length - 1];
