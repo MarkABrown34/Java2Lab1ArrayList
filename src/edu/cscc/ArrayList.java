@@ -63,13 +63,26 @@ public class ArrayList {
 
 //    Remove method
     public Object remove(Object value){
-        boolean removeIndex = false;
+        boolean removedIndex = false;
         Object removedElement = null;
         Object[] newArray = new Object[array.length - 1];
-        for(int i = 0; i < array.length - 1; i++){
-            if(value.equals(array[i])){
-
+        for(int i = 0; i < array.length - 1; i++) {
+            if (value.equals(array[i])) {
+                removedIndex = true;
+                removedElement = array[i];
             }
+            if (removedIndex == false) {
+                newArray[i] = array[i];
+            }
+            if (removedIndex == true) {
+                newArray[i] = array[i + 1];
+            }
+        }
+        if (removedIndex == false) {
+            return null;
+        } else {
+            array = newArray;
+            return removedElement;
         }
     }
 //    Removes and returns the first occurrence of the specified element from
@@ -77,9 +90,26 @@ public class ArrayList {
 
 
 //    Remove and return the element with the given index from the list
-    E remove(int index){
+    public Object remove(int index){
+        boolean removedIndex = false;
+        Object removedElement = array[index];
+        Object[] newArray = new Object[array.length - 1];
 
+        for(int i = 0; i < array.length - 1; i++) {
+            if (i == index) {
+                removedIndex = true;
+            }
+            if (removedIndex == false) {
+                newArray[i] = array[i];
+            }
+            if (removedIndex == true) {
+                newArray[i] = array[i + 1];
+            }
+        }
+        array = newArray;
+        return removedElement;
     }
+
 
 //    Clear method
     public void clear(){
