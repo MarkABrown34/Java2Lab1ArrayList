@@ -39,14 +39,45 @@ public class ArrayList {
     }
 
 
-//    Add the given element, value, to the list at the given index
-    public void add(int index, Object value){
-    if (array.length > array.size()){
-        Object[] newArray = new Object[2 * array.length];
-    }else{
-//        do nothing
+    //    Add the given element, value, to the list at the given index
+    public void add(int index, Object value) {
+        if (index < 0 || index >= array.length) {
+            System.out.println("Invalid index.  Please select valid index.");
+        }
+        boolean currentIndex = false;
+        boolean foundIndex = false;
+        Object[] newArray = new Object[array.length + 1];
+
+        for (int i = 0; i < array.length; i++) {
+            if (i == index) {
+                currentIndex = true;
+            }
+            if (currentIndex == false) {
+                newArray[i] = array[i];
+            }
+            if (currentIndex == true) {
+                newArray[index] = value;
+                foundIndex = true;
+            }
+            if (foundIndex == true) {
+                newArray[i + 1] = array[i];
+            }
+        }
+        array = newArray;
     }
 
+
+//        Add check to determine if array is full.
+//    If not full, add element to array
+//    If full, double array size
+        if (array.length <= array.size()) {
+//        insert element
+        } else {
+            if array.length > array.size() {
+                Object[] newArray = new Object[2 * array.length];
+            }
+
+        }
     }
 //    Add check to determine if array is full
 //    After
@@ -85,8 +116,6 @@ public class ArrayList {
             return removedElement;
         }
     }
-//    Removes and returns the first occurrence of the specified element from
-//    this list, if it is present.
 
 
 //    Remove and return the element with the given index from the list
